@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../cssfiles/signin.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  userAuthFailure,
+  userAuthPending,
+  userAuthSuccess,
+} from "../redux/userslice";
 
 const Signin = () => {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      console.log(process.env.REACT_APP_API_ENDPOINT);
+      dispatch(userAuthPending(true));
       const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signin`, {
         method: "POST",
         headers: {
@@ -20,29 +25,25 @@ const Signin = () => {
         },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+      const data = await res.text();
+      console.log(data);
+      console.log(currentUser);
+      if (!res.ok || data.success === false) {
+        dispatch(userAuthFailure(data.message));
         return;
       }
-      setLoading(false);
-      setError(null);
+      dispatch(userAuthSuccess(data));
       navigate("/");
     } catch (err) {
-      setLoading(false);
-      if (err.message === "failed to fetch") {
-        err.message = "could not connect to server";
-        setError(err.message);
-      } else {
-        setError(err.message);
+      if (err.message === "Failed to fetch" || !navigator.onLine) {
+        err.message = "could not connect to server, try again later";
       }
+      dispatch(userAuthFailure(err.message));
     }
   };
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(formData);
   };
 
   return (

@@ -54,6 +54,7 @@ export const signupAuth = async (req, res, next) => {
 };
 
 export const signinAuth = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -79,7 +80,7 @@ export const signinAuth = async (req, res, next) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .status(200)
-      .json({ success: true, user: rest });
+      .json(rest);
   } catch (err) {
     next(err);
     console.error(err);

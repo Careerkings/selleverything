@@ -1,52 +1,65 @@
+/* 🌟 General container styling */
 #signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-
   background: linear-gradient(
     135deg,
     rgba(79, 172, 254, 0.5),
-    rgba(254, 0, 0, 0.5) /* cyan, 50% opacity */
+    rgba(254, 0, 0, 0.5)
   );
-
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  padding: 1rem;
 }
 
+/* 🔹 Signup box */
 #signup-div {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 2rem;
+  padding: 2rem 2.4rem;
   border-radius: 20px;
-  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.25);
   width: 100%;
   max-width: 400px;
   animation: fadeIn 0.8s ease-in-out;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
 }
 
+#signup-div:hover {
+  transform: translateY(-3px);
+}
+
+/* 🔹 Title */
 #signup-title {
   font-size: 2rem;
   font-weight: bold;
   color: #4facfe;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
   animation: bounce 2s infinite;
 }
 
+/* 🔹 Form */
 #signup-form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
+  position: relative;
 }
 
+/* 🔹 Inputs */
 #signup-form input {
-  padding: 0.9rem;
+  padding: 0.85rem;
   border-radius: 12px;
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #signup-form input:focus {
@@ -56,6 +69,7 @@
   transform: scale(1.02);
 }
 
+/* 🔹 Button */
 #signup-form button {
   padding: 1rem;
   border: none;
@@ -83,6 +97,7 @@
   font-size: 1rem;
 }
 
+/* 🔹 Bottom text */
 #signup-div div {
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -100,13 +115,71 @@
   color: #0077ff;
 }
 
+/* 🔹 Error text */
 #signup-error {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   color: #ff3b3b;
   font-weight: 600;
   animation: shake 0.3s ease-in-out;
 }
 
+/* 🔹 Password validation styles */
+#password-requirements {
+  text-align: left;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+#password-requirements p {
+  margin: 0.25rem 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#password-requirements .valid {
+  color: #00ff88;
+  transform: translateX(4px);
+}
+
+#password-requirements .invalid {
+  color: #ff5555;
+}
+
+/* 🔹 Password visibility toggle */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 2.8rem; /* space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4facfe;
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-password:hover {
+  color: #ff002b;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* 🔹 Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -145,31 +218,75 @@
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-15px);
+    transform: translateY(-12px);
   }
   60% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
 }
 
-@media (max-width: 600px) {
+/* 🔹 Responsive design */
+@media (max-width: 768px) {
   #signup-div {
-    padding: 1.5rem;
-    border-radius: 15px;
-    width: 90%;
-  }
-
-  #signup-form input {
-    font-size: 0.95rem;
-    padding: 0.8rem;
-  }
-
-  #signup-form button {
-    font-size: 0.95rem;
-    padding: 0.9rem;
+    padding: 1.6rem 1.8rem;
+    max-width: 350px;
   }
 
   #signup-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+  }
+
+  #signup-form input,
+  #signup-form button {
+    font-size: 0.95rem;
+    padding: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #signup-container {
+    padding: 0.6rem;
+  }
+
+  #signup-div {
+    padding: 1.2rem 1.4rem;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  #signup-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #signup-form input {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+
+  #signup-form button {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  #password-requirements {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #signup-div {
+    padding: 1rem;
+    max-width: 280px;
+  }
+
+  #signup-title {
+    font-size: 1.3rem;
+  }
+
+  #signup-form input {
+    font-size: 0.85rem;
   }
 }

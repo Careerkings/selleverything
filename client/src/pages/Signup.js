@@ -6,19 +6,40 @@ const Signup = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [passwordValid, setPasswordValid] = useState({
+    length: false,
+    upper: false,
+    lower: false,
+    number: false,
+    special: false,
+  });
+
   const navigate = useNavigate();
+
+  const validatePassword = (password) => {
+    const validation = {
+      length: password.length >= 6,
+      upper: /[A-Z]/.test(password),
+      lower: /[a-z]/.test(password),
+      number: /[0-9]/.test(password),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    };
+    setPasswordValid(validation);
+    return Object.values(validation).every(Boolean);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validatePassword(formData.password || "")) {
+      setError("Password must meet all requirements.");
+      return;
+    }
     try {
       setLoading(true);
-      console.log(process.env.REACT_APP_API_ENDPOINT);
       const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signup`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
@@ -38,7 +59,7 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(formData);
+    if (e.target.id === "password") validatePassword(e.target.value);
   };
 
   return (
@@ -49,7 +70,7 @@ const Signup = () => {
           <input
             type="email"
             id="email"
-            placeholder="email"
+            placeholder="Email"
             autoComplete="email"
             onChange={handleChange}
             required
@@ -57,7 +78,7 @@ const Signup = () => {
           <input
             type="text"
             id="username"
-            placeholder="username"
+            placeholder="Username"
             autoComplete="username"
             onChange={handleChange}
             required
@@ -65,15 +86,35 @@ const Signup = () => {
           <input
             type="password"
             id="password"
-            placeholder="password"
+            placeholder="Password"
             autoComplete="new-password"
             onChange={handleChange}
             required
           />
+
+          <div id="password-requirements">
+            <p className={passwordValid.length ? "valid" : "invalid"}>
+              • Minimum 6 characters
+            </p>
+            <p className={passwordValid.upper ? "valid" : "invalid"}>
+              • At least one uppercase letter
+            </p>
+            <p className={passwordValid.lower ? "valid" : "invalid"}>
+              • At least one lowercase letter
+            </p>
+            <p className={passwordValid.number ? "valid" : "invalid"}>
+              • At least one digit
+            </p>
+            <p className={passwordValid.special ? "valid" : "invalid"}>
+              • At least one special character
+            </p>
+          </div>
+
           <button disabled={loading}>
             {loading ? <p>Loading...</p> : <p>Signup</p>}
           </button>
         </form>
+
         <div>
           <span>Have an account?</span>
           <Link to="/signin">

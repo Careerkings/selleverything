@@ -50,7 +50,7 @@ const Signup = () => {
       }
       setLoading(false);
       setError(null);
-      navigate("/");
+      navigate("/signin");
     } catch (err) {
       setLoading(false);
       setError(err.message);

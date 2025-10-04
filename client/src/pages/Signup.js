@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../cssfiles/signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -12,7 +13,8 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/signup", {
+      console.log(process.env.REACT_APP_API_ENDPOINT);
+      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,6 +44,7 @@ const Signup = () => {
   return (
     <div id="signup-container">
       <div id="signup-div">
+        <h1 id="signup-title">Join Us 🚀</h1>
         <form onSubmit={handleSubmit} id="signup-form">
           <input
             type="email"
@@ -77,7 +80,7 @@ const Signup = () => {
             <span>Signin</span>
           </Link>
         </div>
-        <div>{error && <p>{error}</p>}</div>
+        {error && <p id="signup-error">{error}</p>}
       </div>
     </div>
   );

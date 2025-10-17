@@ -1,0 +1,267 @@
+#home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 94, 0, 0.6),
+    rgba(255, 0, 80, 0.6)
+  );
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+#home-title {
+  font-size: 2.8rem;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.8rem;
+}
+
+#home-title:hover {
+  transform: scale(1.05);
+  color: #ac3131;
+}
+
+#home-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  max-width: 1100px;
+  margin-bottom: 2rem;
+}
+
+#toggle-view-btn {
+  background: linear-gradient(135deg, #ff6600, #ff003c);
+  border: none;
+  color: white;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 10px rgba(255, 100, 0, 0.4);
+}
+
+#toggle-view-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px rgba(255, 100, 0, 0.6);
+}
+
+#carousel-container {
+  position: relative;
+  width: 90%;
+  max-width: 1100px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+#carousel-track {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.carousel-item img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.carousel-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 25px rgba(255, 80, 0, 0.6);
+}
+
+.add-to-cart {
+  background: linear-gradient(135deg, #ff6600, #ff003c);
+  border: none;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: linear-gradient(135deg, #b30000, #660000);
+  transform: scale(1.05);
+}
+
+#carousel-prev,
+#carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  border-radius: 50%;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+#carousel-prev:hover,
+#carousel-next:hover {
+  background: linear-gradient(135deg, #ff6600, #ff003c);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0px 4px 12px rgba(255, 100, 0, 0.6);
+}
+
+#carousel-prev {
+  left: 10px;
+}
+
+#carousel-next {
+  right: 10px;
+}
+
+#carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+  gap: 0.6rem;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: linear-gradient(135deg, #ff6600, #ff003c);
+  transform: scale(1.2);
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  width: 90%;
+  max-width: 1100px;
+  animation: fadeIn 6s ease-in-out;
+}
+
+.grid-card {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 20px;
+  padding: 1rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 6s ease-in; /* slower and smoother */
+  opacity: 0.9;
+}
+
+.grid-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #be3f3f, #b84040);
+  box-shadow: 0px 10px 25px rgba(255, 50, 0, 0.6);
+  opacity: 1;
+  transition: all 6s ease-in-out;
+}
+
+.grid-img-container {
+  position: relative;
+}
+
+.grid-img-container img {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.grid-prev,
+.grid-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.grid-prev:hover,
+.grid-next:hover {
+  background: linear-gradient(135deg, #ff6600, #ff003c);
+}
+
+.grid-prev {
+  left: 8px;
+}
+
+.grid-next {
+  right: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  #home-title {
+    font-size: 2rem;
+  }
+
+  #toggle-view-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .carousel-item img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  #carousel-prev,
+  #carousel-next {
+    display: none;
+  }
+}

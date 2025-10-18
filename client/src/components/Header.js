@@ -8,7 +8,10 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
     <header>
-      <h1>sellEverything</h1>
+      <Link to="/home">
+        {" "}
+        <h1>sellEverything</h1>
+      </Link>
       <form>
         <input
           type="search"

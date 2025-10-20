@@ -8,11 +8,13 @@ import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import ChangePassword from "./pages/ChangePassword";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
     <div>
       <BrowserRouter>
+        <ToastContainer />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

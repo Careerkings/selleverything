@@ -18,7 +18,6 @@ const productSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.products = action.payload;
-      console.log(action.payload);
     },
     productFetchFailure: (state, action) => {
       state.loading = false;

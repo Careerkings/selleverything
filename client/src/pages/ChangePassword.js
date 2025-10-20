@@ -7,7 +7,7 @@ import {
 } from "../redux/userslice";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import "../cssfiles/changePassword.css"; // ✅ import the CSS file
+import "../cssfiles/changePassword.css"; //
 
 const ChangePassword = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);

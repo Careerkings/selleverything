@@ -6,6 +6,7 @@ import {
   productFetchSuccess,
 } from "../redux/productslice";
 import "../cssfiles/home.css";
+import { addToCart } from "../redux/cartSlice";
 
 const Home = () => {
   const { products, loading, error } = useSelector((state) => state.product);
@@ -77,7 +78,8 @@ const Home = () => {
   };
 
   const handleAddToCart = (product) => {
-    alert(`${product.name} added to cart 🛒`);
+    dispatch(addToCart(product));
+    console.log(product);
   };
 
   return (
@@ -95,7 +97,7 @@ const Home = () => {
         <p id="error-text">{error}</p>
       ) : (
         <>
-          {products.length > 0 ? (
+          {products?.length > 0 ? (
             gridMode ? (
               <div id="grid-container">
                 {products.map((product) => (
@@ -109,7 +111,7 @@ const Home = () => {
             ) : (
               <div id="carousel-container">
                 <div id="carousel-track" ref={trackRef}>
-                  {products.map((product) => (
+                  {products?.map((product) => (
                     <div className="carousel-item" key={product._id}>
                       <img src={product.imageUrl} alt={product.name} />
                       <h3>{product.name}</h3>

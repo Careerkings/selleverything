@@ -13,9 +13,7 @@ import Checkout from "../components/Checkout";
 import "../cssfiles/cart.css";
 
 const Cart = () => {
-  const { cartItems, cartTotalAmount, cartTotalQuantity } = useSelector(
-    (state) => state.cart
-  );
+  const { cartItems, cartTotalAmount } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleAddToCart = (cartItem) => dispatch(addToCart(cartItem));
@@ -58,7 +56,7 @@ const Cart = () => {
                   />
                   <div>
                     <h3>{cartItem.name}</h3>
-                    <p className="cart-desc">{cartItem.desc}</p>
+                    <p className="cart-desc">{cartItem.description}</p>
                     <button
                       className="btn-remove"
                       onClick={() => handleRemoveFromCart(cartItem)}
@@ -104,7 +102,7 @@ const Cart = () => {
                 <span className="subtotal-amount">₦{cartTotalAmount}</span>
               </div>
               <div className="checkout-continue">
-                <Checkout cartItems={cartItems} />
+                <Checkout />
 
                 <Link to="/" className="btn-continue">
                   <FaArrowLeft /> Continue Shopping

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth.route.js";
 import productRouter from "./routes/product.route.js";
 import updateUserRouter from "./routes/user.route.js";
+import orderRouter from "./routes/order.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 dotenv.config();
@@ -18,6 +19,7 @@ mongoose
   });
 
 const app = express();
+app.use(express.static("public"));
 app.use(express.json());
 app.use(
   cors({
@@ -34,6 +36,7 @@ app.get("/api", (req, res) => {
 app.use("/api", authRouter);
 app.use("/api", productRouter);
 app.use("/api", updateUserRouter);
+app.use("/api", orderRouter);
 
 app.use((err, req, res, next) => {
   const isCastError = err.name === "CastError";

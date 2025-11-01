@@ -20,11 +20,19 @@ const cartSlice = createSlice({
         state.cartItems[itemIndex].cartQuantity += 1;
         toast.info(`${state.cartItems[itemIndex].name} quantity increased`, {
           position: "bottom-right",
+          autoClose: 0.05,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       } else {
         state.cartItems.push({ ...action.payload, cartQuantity: 1 });
         toast.success(`${action.payload.name} added to cart`, {
           position: "bottom-right",
+          autoClose: 0.05,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       }
     },
@@ -41,6 +49,10 @@ const cartSlice = createSlice({
       if (removedItem) {
         toast.error(`${removedItem.name} removed from cart`, {
           position: "bottom-right",
+          autoClose: 0.05,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       }
     },
@@ -53,6 +65,10 @@ const cartSlice = createSlice({
         state.cartItems[itemIndex].cartQuantity -= 1;
         toast.warning(`${state.cartItems[itemIndex].name} quantity decreased`, {
           position: "bottom-right",
+          autoClose: 0.05,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       } else {
         const removedItem = state.cartItems[itemIndex];
@@ -61,6 +77,10 @@ const cartSlice = createSlice({
         );
         toast.error(`${removedItem.name} removed from cart`, {
           position: "bottom-right",
+          autoClose: 0.05,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       }
     },
@@ -69,6 +89,10 @@ const cartSlice = createSlice({
       state.cartItems = [];
       toast.error("Cart cleared", {
         position: "bottom-right",
+        autoClose: 0.05,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
       });
     },
 

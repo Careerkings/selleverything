@@ -9,6 +9,8 @@ import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import ChangePassword from "./pages/ChangePassword";
 import { ToastContainer } from "react-toastify";
+import Checkout from "./components/Checkout";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkoutSuccess" element={<CheckoutSuccess />} />
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/change-password" element={<ChangePassword />} />

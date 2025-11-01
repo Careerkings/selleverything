@@ -10,8 +10,8 @@ import { addToCart } from "../redux/cartSlice";
 
 const Home = () => {
   const { products, loading, error } = useSelector((state) => state.product);
+  const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
   const trackRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef(null);
@@ -79,7 +79,6 @@ const Home = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    console.log(product);
   };
 
   return (
@@ -104,28 +103,21 @@ const Home = () => {
                   <ProductCard
                     key={product._id}
                     product={product}
-                    onAddToCart={() => handleAddToCart(product)}
+                    cartItems={cartItems}
+                    onAddToCart={handleAddToCart}
                   />
                 ))}
               </div>
             ) : (
               <div id="carousel-container">
                 <div id="carousel-track" ref={trackRef}>
-                  {products?.map((product) => (
-                    <div className="carousel-item" key={product._id}>
-                      <img src={product.imageUrl} alt={product.name} />
-                      <h3>{product.name}</h3>
-                      <p className="price">${product.price}</p>
-                      <p>{product.category}</p>
-                      <p>{product.stock} in stock</p>
-                      <p>{product.description}</p>
-                      <button
-                        className="add-to-cart"
-                        onClick={() => handleAddToCart(product)}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
+                  {products.map((product) => (
+                    <CarouselItem
+                      key={product._id}
+                      product={product}
+                      cartItems={cartItems}
+                      onAddToCart={handleAddToCart}
+                    />
                   ))}
                 </div>
                 <button id="carousel-prev" onClick={prevSlide}>
@@ -156,8 +148,11 @@ const Home = () => {
   );
 };
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, cartItems }) => {
   const [imgIndex, setImgIndex] = useState(0);
+
+  const isAdded = cartItems.some((item) => item._id === product._id);
+
   const images = Array.isArray(product.imageUrl)
     ? product.imageUrl
     : [product.imageUrl];
@@ -183,11 +178,37 @@ const ProductCard = ({ product, onAddToCart }) => {
         )}
       </div>
       <h3>{product.name}</h3>
-      <p className="price">${product.price}</p>
+      <p className="price">₦{product.price}</p>
       <p>{product.category}</p>
       <p>{product.stock} in stock</p>
-      <button className="add-to-cart" onClick={onAddToCart}>
-        Add to Cart
+      <button
+        disabled={isAdded}
+        className={`add-to-cart ${isAdded ? "added" : ""}`}
+        onClick={() => onAddToCart(product)}
+      >
+        {isAdded ? "✔️ Added To Cart" : "🛒 Add to Cart"}
+      </button>
+    </div>
+  );
+};
+
+const CarouselItem = ({ product, onAddToCart, cartItems }) => {
+  const isAdded = cartItems.some((item) => item._id === product._id);
+
+  return (
+    <div className="carousel-item">
+      <img src={product.imageUrl} alt={product.name} />
+      <h3>{product.name}</h3>
+      <p className="price">₦{product.price}</p>
+      <p>{product.category}</p>
+      <p>{product.stock} in stock</p>
+      <p>{product.description}</p>
+      <button
+        disabled={isAdded}
+        className={`add-to-cart ${isAdded ? "added" : ""}`}
+        onClick={() => onAddToCart(product)}
+      >
+        {isAdded ? "✔️ Added To Cart" : "🛒 Add to Cart"}
       </button>
     </div>
   );

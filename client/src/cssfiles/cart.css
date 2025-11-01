@@ -1,27 +1,20 @@
-
 .cart-container {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 1rem;
   font-family: "Poppins", sans-serif;
 }
-
-
 .cart-title {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 2rem;
   color: #222;
 }
-
-
 .cart-empty {
   text-align: center;
   padding: 3rem 1rem;
   font-size: 1.2rem;
 }
-
-
 .btn-continue {
   display: inline-flex;
   align-items: center;
@@ -35,12 +28,9 @@
   margin-left: 1rem;
   transition: background 0.3s ease;
 }
-
 .btn-continue:hover {
   background-color: #0056b3;
 }
-
-
 .cart-header {
   margin-left: 2rem;
   display: grid;
@@ -48,43 +38,36 @@
   align-items: center;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.75rem 0; 
+  padding: 0.75rem 0;
   color: #444;
 }
 .total {
   margin-left: 3rem;
 }
-
-
 .cart-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  align-items: center; 
+  align-items: center;
   border-top: 2px solid #ddd;
   border-bottom: 1px solid #eee;
   padding: 1rem 0;
   column-gap: 0.5rem;
 }
-
-
 .cart-product {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
 .cart-img {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
 }
-
 .cart-desc {
   font-size: 0.9rem;
   color: #666;
 }
-
 .btn-remove {
   background: none;
   border: none;
@@ -94,27 +77,21 @@
   margin-top: 0.4rem;
   transition: color 0.3s ease;
 }
-
 .btn-remove:hover {
   color: #d00000;
 }
-
-
 .cart-price,
 .cart-total {
   font-weight: 600;
   text-align: center;
   color: #333;
 }
-
-
 .cart-quantity {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
-
 .qty-btn {
   background-color: #eee;
   border: none;
@@ -126,11 +103,9 @@
   font-weight: bold;
   transition: background 0.2s;
 }
-
 .qty-btn:hover {
   background-color: #ccc;
 }
-
 .cart-summary {
   margin-top: 2rem;
   display: flex;
@@ -138,7 +113,6 @@
   align-items: flex-end;
   gap: 1rem;
 }
-
 .btn-clear {
   align-self: flex-start;
   background-color: #ff4d4d;
@@ -149,18 +123,15 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
 .btn-clear:hover {
   background-color: #d00000;
 }
-
 .cart-checkout {
   text-align: right;
   width: 100%;
   max-width: 350px;
   margin-top: 1rem;
 }
-
 .subtotal {
   display: flex;
   justify-content: space-around;
@@ -170,15 +141,13 @@
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
-
 .subtotal-amount {
   color: #007bff;
 }
-
-
 @media (max-width: 768px) {
   .cart-header {
-    display: none; 
+    display: none;
+  }
   .cart-item {
     display: flex;
     flex-direction: column;
@@ -186,31 +155,26 @@
     border-bottom: 1px solid #ddd;
     padding: 1rem 0;
   }
-
   .cart-product {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-
   .cart-img {
     width: 100%;
     max-width: 180px;
     border-radius: 10px;
     margin-bottom: 0.5rem;
   }
-
   .cart-product h3 {
     font-size: 1rem;
     margin: 0.3rem 0;
   }
-
   .cart-desc {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 0.5rem;
   }
-
   .btn-remove {
     background: none;
     border: none;
@@ -220,19 +184,16 @@
     padding: 0;
     margin-top: 0.5rem;
   }
-
   .cart-price,
   .cart-total {
     font-size: 1rem;
     font-weight: 600;
   }
-
   .cart-quantity {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-
   .qty-btn {
     background-color: #eee;
     border: 1px solid #ccc;
@@ -242,18 +203,13 @@
     font-size: 1.2rem;
     cursor: pointer;
   }
-
-
   .cart-price {
     margin-top: 0.5rem;
   }
-
   .cart-total {
     margin-top: 0.3rem;
     color: #111;
   }
-
-  /* 🧮 Cart Summary Section */
   .cart-summary {
     display: flex;
     flex-direction: column;
@@ -261,17 +217,14 @@
     margin-top: 2rem;
     gap: 1rem;
   }
-
   .btn-clear {
-    order: 3; 
+    order: 3;
     align-self: center;
     margin-top: 1rem;
   }
-
   .cart-checkout {
     text-align: left;
   }
-
   .subtotal {
     display: flex;
     justify-content: space-between;
@@ -280,18 +233,15 @@
     border-top: 1px solid #ddd;
     padding-top: 1rem;
   }
-
   .subtotal span:first-child {
     text-align: left;
   }
-
   .subtotal-amount {
     text-align: right;
   }
-
   .btn-continue {
     display: inline-block;
     margin-top: 1rem;
-    align-self: flex-end; /* ✅ Align continue button to the right */
+    align-self: flex-end;
   }
 }

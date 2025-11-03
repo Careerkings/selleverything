@@ -17,7 +17,6 @@ export const updateUser = async (req, res, next) => {
         folder: "user_profiles",
       });
     }
-    console.log(req.body.avatar);
     if (req.body.password) {
       req.body.password = await bcryptjs.hash(req.body.password, 10);
     }
@@ -72,12 +71,13 @@ export const changePassword = async (req, res, next) => {
       return next(
         errorHandler(401, "new password is thesame with current password")
       );
-    validUser.password = await bcryptjs.hash(newPassword, 10);
+    const hashPwd = await bcryptjs.hash(newPassword, 10);
+    validUser.password = hashPwd;
     validUser.save();
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
-    const { password: hashPwd, ...rest } = validUser._doc;
+    const { password: pwd, ...rest } = validUser._doc;
     res
       .cookie("access_token", {
         httpOnly: true,

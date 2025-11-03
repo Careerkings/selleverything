@@ -23,10 +23,15 @@ const productSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    resetProductState: () => initialState,
   },
 });
 
-export const { productFetchPending, productFetchSuccess, productFetchFailure } =
-  productSlice.actions;
+export const {
+  productFetchPending,
+  productFetchSuccess,
+  productFetchFailure,
+  resetProductState,
+} = productSlice.actions;
 
 export default productSlice.reducer;

@@ -24,6 +24,7 @@ const Checkout = () => {
       const data = await res.json();
       console.log(data.url);
 
+      setLoading(false);
       if (data.url) {
         setLoading(false);
         window.location.href = data.url;
@@ -44,11 +45,11 @@ const Checkout = () => {
           padding: "12px 24px",
           border: "none",
           borderRadius: "8px",
-          cursor: loading ? "not-allowed" : "pointer", // 👈 changes the cursor
+          cursor: loading ? "not-allowed" : "pointer",
           fontSize: "16px",
           fontWeight: "bold",
           transition: "background-color 0.3s ease",
-          opacity: loading ? 0.7 : 1, // optional visual feedback
+          opacity: loading ? 0.7 : 1,
         }}
         onMouseOver={(e) => {
           if (!loading) e.target.style.backgroundColor = "#1565C0";
@@ -57,7 +58,7 @@ const Checkout = () => {
           if (!loading) e.target.style.backgroundColor = "#1E88E5";
         }}
       >
-        {loading ? "Loading..." : "Checkout"}
+        {loading ? "Checking Out..." : "Checkout"}
       </button>
     </div>
   );

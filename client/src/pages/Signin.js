@@ -16,11 +16,12 @@ const Signin = () => {
   const [showPwd, setShowPwd] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(loading);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      dispatch(userAuthPending(true));
+      dispatch(userAuthPending());
       const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,8 +36,9 @@ const Signin = () => {
         dispatch(userAuthFailure(data.message || "Signin failed."));
         return;
       }
-
+      console.log("its a success");
       dispatch(userAuthSuccess(data));
+      console.log(loading);
       navigate("/");
     } catch (err) {
       if (err.message === "Failed to fetch" || !navigator.onLine) {
@@ -96,7 +98,11 @@ const Signin = () => {
           </Link>
         </div>
 
-        {error && <p style={{ color: "#ffdddd", marginTop: "1rem" }} id="signin-error">{error}</p>}
+        {error && (
+          <p style={{ color: "#ffdddd", marginTop: "1rem" }} id="signin-error">
+            {error}
+          </p>
+        )}
       </div>
     </div>
   );

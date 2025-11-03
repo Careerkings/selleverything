@@ -7,6 +7,7 @@ import {
   logoutUserFailure,
   logoutUserPending,
   logoutUserSuccess,
+  resetUserState,
   updateUserFailure,
   updateUserPending,
   updateUserSuccess,
@@ -14,6 +15,7 @@ import {
 import "../cssfiles/profile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCamera } from "react-icons/fa";
+import { cleanupRedux } from "../utils/cleanupRedux";
 
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -26,6 +28,7 @@ const Profile = () => {
   const [file, setFile] = useState(null);
   const [fileURL, setFileURL] = useState("");
 
+  console.log(loading);
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
@@ -52,11 +55,12 @@ const Profile = () => {
         }
       );
       const data = await res.json();
-      if (data.success === false) {
-        dispatch(updateUserFailure(data.message));
+      if (!res.ok || data.success === false) {
+        dispatch(updateUserFailure(data.message || "Update failed"));
         return;
       }
       dispatch(updateUserSuccess(data));
+      console.log(data);
       setSuccessMsg("Profile updated successfully!");
     } catch (err) {
       dispatch(updateUserFailure(err.message));
@@ -66,8 +70,8 @@ const Profile = () => {
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete your account?"))
       return;
+    dispatch(deleteUserPending());
     try {
-      dispatch(deleteUserPending());
       const res = await fetch(
         `${process.env.REACT_APP_API_ENDPOINT}/delete-user/${currentUser._id}`,
         {
@@ -77,31 +81,33 @@ const Profile = () => {
       );
       const data = await res.json();
       if (!res.ok || data.success === false) {
-        dispatch(deleteUserFailure(data.message));
+        dispatch(deleteUserFailure(data.message || "Delete failed"));
         return;
       }
       dispatch(deleteUserSuccess());
-      console.log(data);
+      await cleanupRedux();
       navigate("/signin");
     } catch (err) {
       dispatch(deleteUserFailure(err.message));
-      alert(err.message);
     }
   };
 
   const handleLogout = async () => {
+    dispatch(logoutUserPending());
     try {
-      dispatch(logoutUserPending());
-      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/logout`);
+      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/logout`, {
+        credentials: "include",
+      });
       const data = await res.json();
       if (!res.ok || data.success === false) {
-        dispatch(logoutUserFailure(data.message));
+        dispatch(logoutUserFailure(data.message || "Logout failed"));
+        return;
       }
       dispatch(logoutUserSuccess());
-      console.log(data);
+      await cleanupRedux();
+
       navigate("/signin");
     } catch (err) {
-      alert("Logout failed");
       dispatch(logoutUserFailure(err.message));
     }
   };
@@ -113,7 +119,7 @@ const Profile = () => {
 
         <div className="profile-image-container">
           <img
-            src={fileURL || currentUser?.avatar || "/default-avatar.png"}
+            src={fileURL || currentUser?.avatar}
             alt="Profile"
             className="profile-avatar"
           />

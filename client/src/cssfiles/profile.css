@@ -152,7 +152,6 @@
   background: #b30000;
 }
 
-/* 🌟 STATUS MESSAGES */
 .success {
   color: #00ff99;
   margin-top: 0.8rem;
@@ -163,7 +162,6 @@
   margin-top: 0.8rem;
 }
 
-/* 🌟 RESPONSIVE */
 @media (max-width: 768px) {
   .profile-card {
     width: 95%;

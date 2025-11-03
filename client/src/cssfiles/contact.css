@@ -1,0 +1,142 @@
+#contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 94, 0, 0.6),
+    rgba(255, 0, 80, 0.6)
+  );
+  font-family: "Poppins", sans-serif;
+  padding: 2rem;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  text-align: center;
+  color: #fff;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 35px rgba(255, 100, 0, 0.4);
+}
+
+.contact-card h2 {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.contact-message {
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+}
+
+.contact-whatsapp {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: #ffe4d0;
+  font-weight: 600;
+}
+
+.contact-sub {
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+  opacity: 0.9;
+}
+
+.contact-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  background: linear-gradient(135deg, #1ebe5d, #0e5c49);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+}
+
+.services-section {
+  margin-top: 2.5rem;
+  text-align: left;
+}
+
+.services-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffe4d0;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-list li {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.services-list li:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+
+.service-name {
+  font-weight: 500;
+}
+
+.service-price {
+  font-weight: 600;
+  color: #ffd700;
+}
+
+@media (max-width: 600px) {
+  .contact-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .contact-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-whatsapp {
+    font-size: 1.2rem;
+  }
+
+  .services-section h3 {
+    font-size: 1.2rem;
+  }
+}

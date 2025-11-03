@@ -7,7 +7,6 @@ import {
   logoutUserFailure,
   logoutUserPending,
   logoutUserSuccess,
-  resetUserState,
   updateUserFailure,
   updateUserPending,
   updateUserSuccess,
@@ -18,7 +17,15 @@ import { FaCamera } from "react-icons/fa";
 import { cleanupRedux } from "../utils/cleanupRedux";
 
 const Profile = () => {
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const {
+    currentUser,
+    updateLoading,
+    logoutLoading,
+    deleteLoading,
+    updateError,
+    logoutError,
+    deleteError,
+  } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const fileRef = useRef();
@@ -28,7 +35,6 @@ const Profile = () => {
   const [file, setFile] = useState(null);
   const [fileURL, setFileURL] = useState("");
 
-  console.log(loading);
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
@@ -156,8 +162,8 @@ const Profile = () => {
           placeholder="Enter your email"
         />
 
-        <button className="update-btn" type="submit" disabled={loading}>
-          {loading ? "Updating..." : "Update Profile"}
+        <button className="update-btn" type="submit" disabled={updateLoading}>
+          {updateLoading ? "Updating..." : "Update Profile"}
         </button>
 
         <Link to="/change-password" className="change-password-link">
@@ -169,23 +175,31 @@ const Profile = () => {
             type="button"
             className="logout-btn"
             onClick={handleLogout}
-            disabled={loading}
+            disabled={logoutLoading}
           >
-            {loading ? "Logging out..." : "Logout"}
+            {logoutLoading ? "Logging out..." : "Logout"}
           </button>
 
           <button
             type="button"
             className="delete-account-btn"
             onClick={handleDelete}
-            disabled={loading}
+            disabled={deleteLoading}
           >
-            {loading ? "Deleting..." : "Delete Account"}
+            {deleteLoading ? "Deleting..." : "Delete Account"}
           </button>
         </div>
 
         {successMsg && <p className="success">{successMsg}</p>}
-        {error && <p className="error">{error}</p>}
+        {updateError ? (
+          <p className="error">{updateError}</p>
+        ) : logoutError ? (
+          <p className="error">{logoutError}</p>
+        ) : deleteError ? (
+          <p className="error">{deleteError}</p>
+        ) : (
+          ""
+        )}
       </form>
     </div>
   );

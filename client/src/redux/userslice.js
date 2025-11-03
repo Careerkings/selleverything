@@ -4,6 +4,12 @@ const initialState = {
   currentUser: null,
   error: null,
   loading: false,
+  updateLoading: false,
+  updateError: null,
+  logoutLoading: false,
+  logoutError: null,
+  deleteLoading: false,
+  deleteError: null,
 };
 
 const userSlice = createSlice({
@@ -24,43 +30,43 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
     updateUserPending: (state, action) => {
-      state.loading = true;
-      state.error = null;
+      state.updateLoading = true;
+      state.updateError = null;
     },
     updateUserSuccess: (state, action) => {
-      state.loading = false;
-      state.error = null;
+      state.updateLoading = false;
+      state.updateError = null;
       state.currentUser = action.payload;
     },
     updateUserFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.updateLoading = false;
+      state.updateError = action.payload;
     },
     deleteUserPending: (state, action) => {
-      state.loading = true;
-      state.error = null;
+      state.deleteLoading = true;
+      state.deleteError = null;
     },
     deleteUserSuccess: (state, action) => {
-      state.loading = false;
-      state.error = null;
+      state.deleteLoading = false;
+      state.deleteError = null;
       state.currentUser = null;
     },
     deleteUserFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.deleteLoading = false;
+      state.deleteError = action.payload;
     },
     logoutUserPending: (state, action) => {
-      state.loading = true;
-      state.error = null;
+      state.logoutLoading = true;
+      state.logoutError = null;
     },
     logoutUserSuccess: (state, action) => {
-      state.loading = false;
-      state.error = null;
+      state.logoutLoading = false;
+      state.logoutError = null;
       state.currentUser = null;
     },
     logoutUserFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.logoutLoading = false;
+      state.logoutError = action.payload;
     },
     resetUserState: () => initialState,
   },

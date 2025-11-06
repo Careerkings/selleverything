@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
+import Search from "./pages/Search";
 
 const App = () => {
   const location = useLocation();
@@ -28,8 +29,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/checkoutSuccess" element={<CheckoutSuccess />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/search" element={<Search />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/change-password" element={<ChangePassword />} />

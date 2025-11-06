@@ -1,32 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCartPlus, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../cssfiles/header.css";
 import { CartTotals } from "../redux/cartSlice";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { cartItems, cartTotalQuantity } = useSelector((state) => state.cart);
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(CartTotals());
   }, [cartItems, dispatch]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search?query=${search.trim()}`);
+  };
 
   return (
     <header>
       <Link to="/">
         <h1>sellEverything</h1>
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="search"
           id="header-search"
-          placeholder="search...
-        "
+          placeholder="search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <FaSearch />
+        <button>
+          <FaSearch />
+        </button>
       </form>
       <div>
         <div>

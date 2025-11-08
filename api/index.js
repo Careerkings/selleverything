@@ -7,7 +7,12 @@ import updateUserRouter from "./routes/user.route.js";
 import orderRouter from "./routes/order.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
+import stripeRouter from "./routes/stripe.route.js";
 dotenv.config();
+
+const app = express();
+const __dirname = path.resolve();
 
 mongoose
   .connect(process.env.MONGODB)
@@ -18,11 +23,8 @@ mongoose
     console.log(err);
   });
 
-const app = express();
+app.use("/api/stripe", stripeRouter);
 
-app.use("/api/stripe", orderRouter);
-
-app.use(express.static("public"));
 app.use(express.json());
 app.use(
   cors({
@@ -40,6 +42,12 @@ app.use("/api", authRouter);
 app.use("/api", productRouter);
 app.use("/api", updateUserRouter);
 app.use("/api", orderRouter);
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.use((err, req, res, next) => {
   const isCastError = err.name === "CastError";
@@ -71,6 +79,8 @@ app.use((err, req, res, next) => {
   return res.status(statusCode).json(response);
 });
 
-app.listen(5000, () => {
-  console.log("port is listening at 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`port is listening at ${PORT}`);
 });

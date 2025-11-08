@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-social">
-          <h4>Follow Us</h4>
+          <h4>Contact Us</h4>
           <div className="social-icons">
             <a
               href="https://www.facebook.com/careerkingsinstitute"

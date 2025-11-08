@@ -9,6 +9,7 @@ const Search = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searching, setSearching] = useState(false);
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
@@ -19,13 +20,14 @@ const Search = () => {
     if (!query) return;
 
     const timer = setTimeout(() => {
+      setSearching(true);
       setLoading(true);
+
       fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/search?searchTerm=${query}&page=${page}`
+        `${process.env.REACT_APP_API_ENDPOINT}/search?query=${query}&page=${page}`
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (page === 1) {
             setSearchItems(data.searchedProducts);
           } else {
@@ -33,9 +35,12 @@ const Search = () => {
           }
           setTotalPages(data.totalPages);
         })
-        .catch((err) => console.error("Error fetching search results:", err))
-        .finally(() => setLoading(false));
-    }, 400);
+        .catch((err) => {
+          console.error("Error fetching search results:", err);
+          setLoading(false);
+          setSearching(false);
+        });
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [query, page]);
@@ -45,34 +50,41 @@ const Search = () => {
   };
 
   const handleLoadMore = () => {
-    if (page < totalPages) setPage((prev) => prev + 1);
+    if (page < totalPages) {
+      setPage((prev) => prev + 1);
+    }
   };
 
   return (
-    <div id="search-container">
-      <h2 id="search-title">Search Results for “{query}”</h2>
+    <div id="home-container">
+      <h2 id="home-title">Search Results for "{query}"</h2>
 
-      {loading && page === 1 ? (
-        <p id="loading-spinner">Loading products...</p>
-      ) : searchItems.length === 0 ? (
-        <p id="error-text">No products found for “{query}”.</p>
-      ) : (
-        <div id="search-results">
-          {searchItems.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              cartItems={cartItems}
-              onAddToCart={handleAddToCart}
-            />
-          ))}
+      {searching && page === 1 && (
+        <div className="search-loader">
+          <div className="spinner"></div>
+          <p>Searching...</p>
         </div>
       )}
 
-      {loading && page > 1 && <p id="loading-spinner">Loading more...</p>}
+      {!loading && searchItems.length === 0 && !searching && (
+        <p id="error-text">No products found for "{query}".</p>
+      )}
+
+      <div id="grid-container">
+        {searchItems.map((product) => (
+          <ProductCard
+            key={product._id}
+            product={product}
+            cartItems={cartItems}
+            onAddToCart={handleAddToCart}
+          />
+        ))}
+      </div>
+
+      {loading && page > 1 && <p id="loading-text">Loading more...</p>}
 
       {!loading && page < totalPages && searchItems.length > 0 && (
-        <button onClick={handleLoadMore} id="load-more-btn">
+        <button onClick={handleLoadMore} className="load-more-btn">
           Load More
         </button>
       )}
@@ -98,9 +110,9 @@ const ProductCard = ({ product, onAddToCart, cartItems }) => {
     setImgIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <div className="search-card">
-      <div className="search-img-container">
-        <img src={images[imgIndex]} alt={product.name} className="search-img" />
+    <div className="grid-card">
+      <div className="grid-img-container">
+        <img src={images[imgIndex]} alt={product.name} />
         {images.length > 1 && (
           <>
             <button className="grid-prev" onClick={prevImage}>
@@ -112,15 +124,13 @@ const ProductCard = ({ product, onAddToCart, cartItems }) => {
           </>
         )}
       </div>
-
-      <h3 className="search-name">{product.name}</h3>
-      <p className="search-price">₦{product.price}</p>
-      <p className="search-category">{product.category}</p>
-      <p className="search-stock">{product.stock} in stock</p>
-
+      <h3>{product.name}</h3>
+      <p className="price">₦{product.price}</p>
+      <p>{product.category}</p>
+      <p>{product.stock} in stock</p>
       <button
         disabled={isAdded}
-        className={`search-add-btn ${isAdded ? "added" : ""}`}
+        className={`add-to-cart ${isAdded ? "added" : ""}`}
         onClick={() => onAddToCart(product)}
       >
         {isAdded ? "✔️ Added To Cart" : "🛒 Add to Cart"}

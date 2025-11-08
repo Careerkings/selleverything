@@ -27,7 +27,12 @@ export const searchProduct = async (req, res, next) => {
 
   try {
     const searchedProducts = await Product.find({
-      name: { $regex: query, $options: "i" },
+      $or: [
+        {
+          name: { $regex: query, $options: "i" },
+        },
+        { category: { $regex: query, $options: "i" } },
+      ],
     })
       .skip(skip)
       .limit(limit);

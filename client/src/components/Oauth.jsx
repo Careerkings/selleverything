@@ -1,6 +1,11 @@
-import React from "react";
 import { app } from "../firebase";
-import { getAuth, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { userAuthSuccess } from "../redux/userslice";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +18,7 @@ const Oauth = () => {
     try {
       const auth = getAuth(app);
       const provider = new GoogleAuthProvider();
-      await setPersistence(auth, browserLocalPersistence)
+      await setPersistence(auth, browserLocalPersistence);
       const result = await signInWithPopup(auth, provider);
       const { displayName, email, photoURL } = result.user;
 

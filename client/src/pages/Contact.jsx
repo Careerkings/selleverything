@@ -115,7 +115,6 @@ const Contact = () => {
               <li key={idx}>
                 <span className="service-name">{service.name}</span>
                 <span className="service-price">{service.price}</span>
-                {/* optional display of naira: <span className="service-naira">{service.naira}</span> */}
               </li>
             ))}
           </ul>

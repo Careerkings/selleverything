@@ -1,4 +1,4 @@
-import { react, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../redux/cartSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";

@@ -140,7 +140,11 @@ const Signup = () => {
             <span> Signin</span>
           </Link>
         </div>
-        {error && <p style={{ color: "#ffdddd", marginTop: "1rem" }} id="signup-error">{error}</p>}
+        {error && (
+          <p style={{ color: "#ffdddd", marginTop: "1rem" }} id="signup-error">
+            {error}
+          </p>
+        )}
       </div>
     </div>
   );

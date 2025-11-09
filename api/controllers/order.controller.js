@@ -90,7 +90,7 @@ export const orderCheckout = async (req, res, next) => {
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 };
 

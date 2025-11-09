@@ -48,8 +48,7 @@ export const signupAuth = async (req, res, next) => {
       .status(201)
       .json({ success: true, message: "User registered successfully." });
   } catch (err) {
-    next(err);
-    console.error(err);
+    next(err.message);
   }
 };
 
@@ -83,8 +82,7 @@ export const signinAuth = async (req, res, next) => {
       .json(rest);
     console.log(token);
   } catch (err) {
-    next(err);
-    console.error(err);
+    next(err.message);
   }
 };
 
@@ -137,7 +135,7 @@ export const googleAuth = async (req, res, next) => {
         .json(rest);
     }
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 };
 
@@ -146,6 +144,6 @@ export const logoutUser = (req, res, next) => {
     res.clearCookie("access_token");
     res.status(200).json("user logged out successfully");
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 };

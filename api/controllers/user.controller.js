@@ -35,7 +35,7 @@ export const updateUser = async (req, res, next) => {
     const { password: pwd, ...rest } = updatedUser._doc;
     res.status(200).json(rest);
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 };
 
@@ -47,7 +47,7 @@ export const deleteUser = async (req, res, next) => {
     res.clearCookie("access_token");
     res.status(200).json("user deleted successfully");
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 };
 
@@ -87,6 +87,6 @@ export const changePassword = async (req, res, next) => {
       .status(200)
       .json(rest);
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 };

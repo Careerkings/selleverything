@@ -16,13 +16,13 @@ const Signin = () => {
   const [showPwd, setShowPwd] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(loading);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       dispatch(userAuthPending());
-      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/signin`, {
+      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

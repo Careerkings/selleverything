@@ -24,7 +24,7 @@ const Search = () => {
       setLoading(true);
 
       fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/search?query=${query}&page=${page}`
+        `${process.env.REACT_APP_API_ENDPOINT}/product/search?query=${query}&page=${page}`
       )
         .then((res) => res.json())
         .then((data) => {

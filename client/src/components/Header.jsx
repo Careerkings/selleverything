@@ -18,7 +18,7 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?query=${search.trim()}`);
+    navigate(`product/search?query=${search.trim()}`);
   };
 
   return (

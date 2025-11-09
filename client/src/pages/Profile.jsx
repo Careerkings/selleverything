@@ -52,7 +52,7 @@ const Profile = () => {
     dispatch(updateUserPending());
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/update-user/${currentUser._id}`,
+        `${process.env.REACT_APP_API_ENDPOINT}/user/update-user/${currentUser._id}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -79,7 +79,7 @@ const Profile = () => {
     dispatch(deleteUserPending());
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/delete-user/${currentUser._id}`,
+        `${process.env.REACT_APP_API_ENDPOINT}/user/delete-user/${currentUser._id}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -101,7 +101,7 @@ const Profile = () => {
   const handleLogout = async () => {
     dispatch(logoutUserPending());
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/logout`, {
+      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/auth/logout`, {
         credentials: "include",
       });
       const data = await res.json();

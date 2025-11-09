@@ -10,7 +10,7 @@ const Checkout = () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/order/create-checkout-session`,
+        "/api/order/create-checkout-session",
         {
           method: "POST",
           credentials: "include",

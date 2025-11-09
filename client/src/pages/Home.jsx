@@ -22,7 +22,7 @@ const Home = () => {
       try {
         dispatch(productFetchPending());
         const res = await fetch(
-          `${process.env.REACT_APP_API_ENDPOINT}/product/fetch-product`
+          "/api/product/fetch-product"
         );
         const data = await res.json();
         if (!res.ok || data.success === false) {

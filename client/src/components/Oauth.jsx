@@ -22,7 +22,7 @@ const Oauth = () => {
       const result = await signInWithPopup(auth, provider);
       const { displayName, email, photoURL } = result.user;
 
-      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/auth/google`, {
+      const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -22,7 +22,7 @@ const Signin = () => {
     e.preventDefault();
     try {
       dispatch(userAuthPending());
-      const res = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/auth/signin`, {
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

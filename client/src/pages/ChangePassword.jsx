@@ -39,7 +39,7 @@ const ChangePassword = () => {
     try {
       dispatch(updateUserPending());
       const res = await fetch(
-        `${process.env.REACT_APP_API_ENDPOINT}/user/change-password/${currentUser._id}`,
+        `/api/user/change-password/${currentUser._id}`,
         {
           method: "PATCH",
           credentials: "include",

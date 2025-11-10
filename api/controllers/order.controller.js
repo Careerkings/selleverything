@@ -74,8 +74,8 @@ export const orderCheckout = async (req, res, next) => {
       phone_number_collection: { enabled: true },
       line_items,
       mode: "payment",
-      success_url: `${process.env.CLIENT_URL}/CheckoutSuccess?success=true`,
-      cancel_url: `${process.env.CLIENT_URL}/Cart?canceled=true`,
+      success_url: `${process.env.DEPLOY_URL}/CheckoutSuccess?success=true`,
+      cancel_url: `${process.env.DEPLOY_URL}/Cart?canceled=true`,
       metadata: {
         userId: userId || "guest",
         cart: JSON.stringify(

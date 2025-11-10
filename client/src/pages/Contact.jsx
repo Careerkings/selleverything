@@ -49,7 +49,6 @@ const Contact = () => {
       naira: "₦170,000 – ₦425,000",
     },
 
-    /* Fintech & Advanced */
     {
       name: "Fintech Platform (payments, KYC, payouts)",
       price: "$2,500 – $10,000+",
@@ -90,7 +89,7 @@ const Contact = () => {
   return (
     <div id="contact-container">
       <div className="contact-card">
-        <h2>Contact Us</h2>
+        <h2>About Us</h2>
         <p className="contact-message">
           We’re here to help! Reach out to us anytime on WhatsApp.
         </p>

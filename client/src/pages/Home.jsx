@@ -15,15 +15,17 @@ const Home = () => {
   const trackRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef(null);
-  const [gridMode, setGridMode] = useState(false);
+  const [gridMode, setGridMode] = useState(true);
+
+
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         dispatch(productFetchPending());
-        const res = await fetch(
-          "/api/product/fetch-product"
-        );
+        const res = await fetch("/api/product/fetch-product");
         const data = await res.json();
         if (!res.ok || data.success === false) {
           dispatch(productFetchFailure(data.message));
@@ -54,6 +56,7 @@ const Home = () => {
     );
   };
 
+
   useEffect(() => {
     if (!gridMode && products.length > 1) {
       intervalRef.current = setInterval(nextSlide, 5000);
@@ -79,6 +82,18 @@ const Home = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+  };
+
+  
+  const handleSwipe = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        nextSlide(); 
+      } else {
+        prevSlide(); 
+      }
+    }
   };
 
   return (
@@ -109,7 +124,17 @@ const Home = () => {
                 ))}
               </div>
             ) : (
-              <div id="carousel-container">
+             
+              <div
+                id="carousel-container"
+                onTouchStart={(e) =>
+                  (touchStartX.current = e.touches[0].clientX)
+                }
+                onTouchMove={(e) =>
+                  (touchEndX.current = e.touches[0].clientX)
+                }
+                onTouchEnd={handleSwipe}
+              >
                 <div id="carousel-track" ref={trackRef}>
                   {products.map((product) => (
                     <CarouselItem

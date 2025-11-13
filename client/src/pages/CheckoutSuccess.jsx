@@ -20,8 +20,8 @@ const CheckoutSuccess = () => {
     }
 
     if (canceled === "true") {
-      dispatch(clearCart());
-      console.log("Checkout canceled — cart cleared.");
+ 
+      console.log("Checkout canceled — keep shopping.");
     }
 
     const timer = setTimeout(() => {
@@ -61,7 +61,7 @@ const CheckoutSuccess = () => {
           </div>
         </>
       ) : (
-        <h2>❌ Payment Canceled. Your cart has been cleared.</h2>
+        <h2>❌ Payment Canceled. keep shopping.</h2>
       )}
       <p>Redirecting to homepage...</p>
     </div>
